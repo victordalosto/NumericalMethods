@@ -10,11 +10,11 @@
 function Quadrature_Gauss
 %% INPUT SECTION
 syms x
-F = sin(x)*x^25; % Input F function to integrated
+F = sin(x)*x^2; % Input F function to integrated
 lowerLimit = -1; 
 upperLimit = 2.2;
-% Number of Gauss point find accurate result for n-1 function
-% Example: n=3 find accurate integral until 5 degree polynomial
+% Number of Gauss point finds an accurate result until an degree n-1 function
+% Ex: n=3 finds an accurate integral for a function of polynomial degree equal or lesser than 5
 nGaussPoints = 64;
 
 
@@ -43,7 +43,7 @@ end
 % Sum of integral function
 fun = 0;
 for k = 1:1:n
-fun = fun + (upperLimit-lowerLimit)/2 * P(k)*subs(F,((upperLimit-lowerLimit)/2)*W(k) + ((lowerLimit+upperLimit)/2));
+   fun = fun + (upperLimit-lowerLimit)/2 * P(k)*subs(F,((upperLimit-lowerLimit)/2)*W(k) + ((lowerLimit+upperLimit)/2));
 end
 
 
@@ -51,10 +51,7 @@ end
 % Export graphic to Command window
 ezplot(F, floor(lowerLimit), ceil(upperLimit)); hold on; grid on;
 
-% Print the output in Command window
-sprintf('Numerical Integration\nf(x) = %s     Bounds = [ %.f ; %.f ]\nn = %.0f Points     Exate to polynome = %.0f \n\nArea = %.10f ',F,lowerLimit,upperLimit,n,(2*n-1), fun)
-
-% clearvars x F lowerLimit upperLimit nGaussPoints n W P
+% Print the output in the Command window
+sprintf('Numerical Integration\nf(x) = %s     Bounds = [ %.f ; %.f ]\nn = %.0f Points     Exate to polynome = %.0f \n\nArea = %.10f ',F , lowerLimit, upperLimit, n, (2*n-1), fun)
 
 end
-

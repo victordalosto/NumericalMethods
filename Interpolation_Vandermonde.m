@@ -13,13 +13,12 @@ function Interpolation_Vandermonde
 %% INPUT SECTION
 syms x
 
-% Input data is a sized nx2 Matrix Dados[n,2] where:
-% Dados[n,1]=x   and   Dados[n,2]=f(x)
-Dados = [1 1
-         3 4
-         5 9
-         6 16
-         8 25];
+x_values = [1.1 2.1 3.5 4.1  5.5  6.1   7.0  8.1  9.0  10.1 11.0];
+y_values = [5.5 9.0 13  15.1 17.5 17.45 17.8 18.1 18.4 18.9 19.5];
+
+% The Input format is a size [n,2] matrix 'Dados', where:
+Dados(:,1) = x_values;  % [n,1] = x
+Dados(:,2) = y_values;  % [n,2] = f(x) = y
 
 
 %% SCRIPT SECTION
@@ -41,17 +40,13 @@ end
 
 %% OUTPUT SECTION
 % Export graphic to Command window
-minValue = floor(min(Dados(1,2) - Dados(2,2), min(Dados(:,1)*0.65)));
-maxValue = ceil(min( Dados(length(Dados), 2) + abs(min(Dados(1,2) - Dados(2,2))), max(Dados(:,1)*1.05)));
-ezplot(fun, minValue, maxValue);  hold on; grid on
-scatter(Dados(:,1),Dados(:,2))
+minValue = floor(min(Dados(1,1) - Dados(2,1)*0.5, min(Dados(:,1)*0.65)));
+maxValue = ceil(min( Dados(length(Dados), 1) + abs(min(Dados(1,1) - Dados(2,1))), max(Dados(:,1)*1.05)));  
+ezplot(fun, [minValue maxValue]);  hold on; grid on
+scatter(Dados(:,1), Dados(:,2));
 hold off
 
-% Print the output in Command window
-vpa(Dados)
-vpa(fun,6)
-
-% clearvars x Dados A B minValue maxValue
+% Print the output in the Command window
+vpa(fun, 10)
 
 end
-
